@@ -4,8 +4,39 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity WebGL Player | BlocksStack</title>
+    <style>
+      body {
+        text-align: center;
+        padding: 0;
+        border: 0;
+        margin: 0;
+      }
+
+      #loading-screen {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background: #231F20;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      }
+
+      canvas {
+        width: 960px;
+        height: 600px;
+        background: #231F20;
+      }
+    </style>
   </head>
   <body style="text-align: center; padding: 0; border: 0; margin: 0;">
+      <!-- Loading Screen -->
+      <div id="loading-screen">
+        <img src="loading.gif" alt="Loading...">
+      </div>
+
+      <!-- Unity Canvas -->
     <canvas id="unity-canvas" width=720 height=1280 style="width: 720px; height: 1280px; background: #231F20"></canvas>
     <script src="Build/build0.loader.js"></script>
     <script>
@@ -34,7 +65,10 @@
         productVersion: "1.0",
         // matchWebGLToCanvasSize: false, // Uncomment this to separately control WebGL canvas render size and DOM element size.
         // devicePixelRatio: 1, // Uncomment this to override low DPI rendering on high DPI displays.
-      });
+      }).then(() => {
+          // Hide loading screen when Unity loads
+          document.getElementById("loading-screen").style.display = "none";
+        });
     </script>
   </body>
 </html>
